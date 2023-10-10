@@ -10,4 +10,7 @@ export class Product {
     public dateCreated: Date,
     public lastUpdate: Date
   )
+  {
+
+  }
 }
