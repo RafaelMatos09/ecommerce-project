@@ -16,7 +16,7 @@ export class CartService {
 
   addToCart(theCartItem: CartItem) {
     let alreadyExistsInCart: boolean = false;
-    let existingCartItem: CartItem = {} as CartItem;
+    let existingCartItem: CartItem | null = null;
 
     if (this.cartItems.length > 0) {
       for(let tempCartItem of this.cartItems){
@@ -28,7 +28,8 @@ export class CartService {
       alreadyExistsInCart = (existingCartItem != undefined);
     }
     if (alreadyExistsInCart) {
-      existingCartItem.quantity++;
+      if(existingCartItem)
+        existingCartItem.quantity++;
     }
     else {
       this.cartItems.push(theCartItem);
@@ -43,7 +44,7 @@ export class CartService {
 
     for (let currentCartItem of this.cartItems) {
       totalPriceValue += currentCartItem.quantity * currentCartItem.unitPrice;
-      totalPriceValue += currentCartItem.quantity;
+      totalQuantityValue += currentCartItem.quantity;
     }
 
     this.totalPrice.next(totalPriceValue);
